@@ -64,7 +64,7 @@ export default function ProfileLeftbar() {
           return (
                     <div className='ProfileLeftbar'>
                               <div className='NotificationsContainer'>
-                                        <img src={`${image2}`} className="ProfilepageCover" alt="" />
+                      
                                          <div style={{display:'flex' , alignItems:'center' , marginTop:-30}}>
                                                   <img src={`${image2}`} className="Profilepageimage" alt="" />
                                                   <div>
