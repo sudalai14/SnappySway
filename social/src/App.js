@@ -1,7 +1,7 @@
 
 import './App.css';
-import Profile from './Component/Profile/Profile';
-import Home from './Pages/Pages/Home';
+import Profile from './Pages/Profile/Profile';
+import Home from './Pages/Home/Home';
 import Login from './Pages/Login/login';
 import Signup from './Pages/Register/signup';
 import { BrowserRouter, Routes, Route ,Navigate } from 'react-router-dom';

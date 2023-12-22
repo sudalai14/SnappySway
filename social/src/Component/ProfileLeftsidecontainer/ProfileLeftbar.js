@@ -97,27 +97,27 @@ export default function ProfileLeftbar() {
                                         <p style={{marginRight:10 , color:"#aaa"}}>See all</p>
                                 </div>
                                 <div style={{display:'flex' , flexWrap:"wrap" , marginLeft:5}}>
-                                  <div style={{marginLeft:4}}>
+                                  <div style={{marginLeft:4 , cursor:"pointer"}}>
                                     <img src={`${image1}`} className='friendimage' alt=''/>
                                     <p style={{marginTop:-2}}>Ancy</p>
                                   </div>
-                                  <div style={{marginLeft:4}}>
+                                  <div style={{marginLeft:4, cursor:"pointer"}}>
                                     <img src={`${image2}`} className='friendimage' alt=''/>
                                     <p style={{marginTop:-2}}>Ancy</p>
                                   </div>
-                                  <div style={{marginLeft:4}}>
+                                  <div style={{marginLeft:4, cursor:"pointer"}}>
                                     <img src={`${image3}`} className='friendimage' alt=''/>
                                     <p style={{marginTop:-2}}>Ancy</p>
                                   </div>
-                                  <div style={{marginLeft:4}}>
+                                  <div style={{marginLeft:4, cursor:"pointer"}}>
                                     <img src={`${image4}`} className='friendimage' alt=''/>
                                     <p style={{marginTop:-2}}>Ancy</p>
                                   </div>
-                                  <div style={{marginLeft:4}}>
+                                  <div style={{marginLeft:4, cursor:"pointer"}}>
                                     <img src={`${image5}`} className='friendimage' alt=''/>
                                     <p style={{marginTop:-2}}>Ancy</p>
                                   </div>
-                                  <div style={{marginLeft:4}}>
+                                  <div style={{marginLeft:4, cursor:"pointer"}}>
                                     <img src={`${image6}`} className='friendimage' alt=''/>
                                     <p style={{marginTop:-2}}>Ancy</p>
                                   </div>
