@@ -6,7 +6,7 @@ export default function login() {
     <div className='mainContainerForsignup'>
       <div className='submainContainer'>
         <div style={{flex:1, marginLeft:150, marginBottom:"170px"}}>
-          <p className='logoText'>Soc<span className='part'>ial</span></p>
+          <p className='logoText'>Snappy<span className='part'>Sway</span></p>
           <p className='introtext'>Connect with your <span className='part'> family and friends </span></p>
         </div>
           <div style={{flex:3}}>
