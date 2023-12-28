@@ -50,38 +50,39 @@ router.post("/create/user" ,
 
         }
     })
-//        Login
-// router.post("/login" ,
-//     body('email').isEmail(),
-//     body('password').isLength({ min: 6 }) ,
-//     async(req , res)=>{
-//         //   const error = validationResult(req);
-//         //   if(!error.isEmpty()){
-//         //             return res.status(400).json("some error occured")
-//         //   }
+       //Login
+router.post("/login" ,
+    body('email').isEmail(),
+    body('password').isLength({ min: 6 }) ,
+    async(req , res)=>{
+       const error = validationResult(req);
+           if(!error.isEmpty()){
+                    return res.status(400).json("some error occured")
+           }
 
-//         //   try {
-//           const user = await User.findOne({email:req.body.email});
-//           if(!user){
-//                   return res.status(400).json("User doesn't found")  
-//           }
+          try {
+          const user = await User.findOne({email:req.body.email});
+          if(!user){
+                  return res.status(400).json("User doesn't found")  
+          }
 
-//           const Comparepassword = await bcrypt.compare(req.body.password , user.password);
-//           if(!Comparepassword){
-//                     return res.status(400).json("Password error")
-//           }
-//           const accessToken = jwt.sign({
-//                     id:user._id,
-//                     username:user.username
-//           }, JWTSEC);
-//           const {password , ...other} = user._doc
-//           res.status(200).json({other , accessToken});
+          const Comparepassword = await bcrypt.compare(req.body.password , user.password);
+          if(!Comparepassword){
+                    return res.status(400).json("Password error")
+          }
+          const accessToken = jwt.sign({
+                    id:user._id,
+                    username:user.username
+          }, JWTSEC);
+         
+          const {password , ...other} = user._doc
+         res.status(200).json({other , accessToken});
                     
-// // } catch (error) {
-// //             res.status(500).json("Internal error occured")        
-// // }
+ } catch (error) {
+             res.status(500).json("Internal error occured")        
+ }
 
-// })
+})
 
 
 
@@ -103,7 +104,28 @@ router.post("/create/user" ,
 //             host: "smtp.mailtrap.io",
 //             port: 2525,
 //             auth: {
-//               user: process.env.USER,
+//               user: process.env.USER,         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //               pass: process.env.PASS
 //             }
 //           });
