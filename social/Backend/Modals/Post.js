@@ -11,16 +11,18 @@ const PostSchema = new mongoose.Schema({
           },
           image:{
                     type:String,
-                    // required:true
+                     required:true
           },
           video:{
                     type:String,
           },
           like:{
                     type:Array,
+                    default:0
           },
           dislike:{
                     type:Array,
+                    default:0
           },
           comments:[
                     {

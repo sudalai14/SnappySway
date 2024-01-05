@@ -5,9 +5,9 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const { verifyToken } = require("./verifytoken");
-// const Post = require("../Modals/Post");
+//const Post = require("../Modals/Post");
 // const { generateOTP } = require("./Extra/mail");
-// const VerificationToken = require("../Modals/VerificationToken");
+//const VerificationToken = require("../Modals/VerificationToken");
 const JWTSEC = "#2@!@$ndja45883 r7##";
 // const nodemailer = require('nodemailer');
 // const ResetToken = require("../Modals/ResetToken");
@@ -76,7 +76,7 @@ router.post("/login" ,
           }, JWTSEC);
          
           const {password , ...other} = user._doc
-         res.status(200).json({other , accessToken});
+          res.status(200).json({other , accessToken});
                     
  } catch (error) {
              res.status(500).json("Internal error occured")        
