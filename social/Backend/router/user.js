@@ -4,8 +4,8 @@ const User = require("../Modals/User");
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// const { verifyToken } = require("./verifytoken");
-//const Post = require("../Modals/Post");
+const { verifyToken } = require("./verifytoken");
+const Post = require("../Modals/Post");
 // const { generateOTP } = require("./Extra/mail");
 //const VerificationToken = require("../Modals/VerificationToken");
 const JWTSEC = "#2@!@$ndja45883 r7##";
@@ -87,7 +87,7 @@ router.post("/login" ,
 
 
 
-    module.exports=router;
+  
 
 //           const accessToken = jwt.sign({
 //                     id:user._id,
@@ -300,78 +300,78 @@ router.post("/login" ,
 
 // })
 
-// //Following
-// router.put("/following/:id" , verifyToken , async(req , res)=>{
-//     if(req.params.id !== req.body.user){
-//         const user = await User.findById(req.params.id);
-//         const otheruser = await User.findById(req.body.user);
+//Following
+router.put("/following/:id" , verifyToken , async(req , res)=>{
+    if(req.params.id !== req.body.user){
+        const user = await User.findById(req.params.id);
+        const otheruser = await User.findById(req.body.user);
 
-//         if(!user.Followers.includes(req.body.user)){
-//             await user.updateOne({$push:{Followers:req.body.user}});
-//             await otheruser.updateOne({$push:{Following:req.params.id}});
-//             return res.status(200).json("User has followed");
-//         }else{
-//             await user.updateOne({$pull:{Followers:req.body.user}});
-//             await otheruser.updateOne({$pull:{Following:req.params.id}});
-//             return res.status(200).json("User has Unfollowed");
-//         }
-//     }else{
-//         return res.status(400).json("You can't follow yourself")
-//     }
-// })
+        if(!user.Followers.includes(req.body.user)){
+            await user.updateOne({$push:{Followers:req.body.user}});
+            await otheruser.updateOne({$push:{Following:req.params.id}});
+            return res.status(200).json("User has followed");
+        }else{
+            // await user.updateOne({$pull:{Followers:req.body.user}});
+            // await otheruser.updateOne({$pull:{Following:req.params.id}});
+            return res.status(400).json("User has Unfollowed");
+        }
+    }else{
+        return res.status(400).json("You can't follow yourself")
+    }
+})
 
-// //Fetch post from following
-// router.get("/flw/:id" , verifyToken , async(req , res)=>{
-//     try {
-//         const user = await User.findById(req.params.id);
-//         const followersPost = await Promise.all(
-//             user.Following.map((item)=>{
-//                 return Post.find({user:item})
-//             })
-//         )
-//         const userPost = await Post.find({user:user._id});
+//Fetch post from following
+router.get("/flw/:id" , verifyToken , async(req , res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        const followersPost = await Promise.all(
+            user.Following.map((item)=>{
+                return Post.find({user:item})
+            })
+        )
+        //const userPost = await Post.find({user:user._id});
 
-//         res.status(200).json(userPost.concat(...followersPost));
-//     } catch (error) {
-//         return res.status(500).json("Internal server error")
-//     }
-// })
+        res.status(200).json(followersPost);
+    } catch (error) {
+        return res.status(500).json("Internal server error")
+    }
+})
 
-// //Update User Profile
-// router.put("/update/:id" , verifyToken , async(req , res)=>{
-//     try {
-//         if(req.params.id === req.user.id){
-//             if(req.body.password){
-//                 const salt = await bcrypt.genSalt(10);
-//                 const secpass = await bcrypt.hash(req.body.password , salt);
-//                 req.body.password = secpass;
-//                 const updateuser = await User.findByIdAndUpdate(req.params.id , {
-//                     $set:req.body
-//                 });
-//                 await updateuser.save();
-//                 res.status(200).json(updateuser);
-//             }
-//         }else{
-//             return res.status(400).json("Your are not allow to update this user details ")
-//         }
-//     } catch (error) {
-//         return res.status(500).json("Internal server error")
-//     }
-// })
+//Update User Profile
+router.put("/update/:id" , verifyToken , async(req , res)=>{
+    try {
+        if(req.params.id === req.user.id){
+            if(req.body.password){
+                const salt = await bcrypt.genSalt(10);
+                const secpass = await bcrypt.hash(req.body.password , salt);
+                req.body.password = secpass;
+                const updateuser = await User.findByIdAndUpdate(req.params.id , {
+                    $set:req.body
+                });
+                await updateuser.save();
+                res.status(200).json(updateuser);
+            }
+        }else{
+            return res.status(400).json("Your are not allow to update this user details ")
+        }
+    } catch (error) {
+        return res.status(500).json("Internal server error")
+    }
+})
 
-// //Delete User account 
-// router.delete("/delete/:id" , verifyToken , async(req , res)=>{
-//     try {
-//         if(req.params.id !== req.user.id){
-//             return res.status(400).json("Account doesn't match")
-//         }else{
-//             const user = await User.findByIdAndDelete(req.params.id);
-//             return res.status(200).json("User account has been deleted")
-//         }
-//     } catch (error) {
-//         return res.status(500).json("Internal server error")
-//     }
-// })
+//Delete User account 
+router.delete("/delete/:id" , verifyToken , async(req , res)=>{
+    try {
+        if(req.params.id !== req.user.id){
+            return res.status(400).json("Account doesn't match")
+        }else{
+            const user = await User.findByIdAndDelete(req.params.id);
+            return res.status(200).json("User account has been deleted")
+        }
+    } catch (error) {
+        return res.status(500).json("Internal server error")
+    }
+})
 
 // //get user details for post
 // router.get("/post/user/details/:id" , async(req , res)=>{
@@ -418,4 +418,4 @@ router.post("/login" ,
 
 
 
-// module.exports = router;
+ module.exports = router;
