@@ -109,20 +109,20 @@ router.put("/comment/post" , verifyToken , async(req , res)=>{
       }
 })
 
-// //Delete post 
-// router.delete("/delete/post/:id" , verifyToken , async(req , res)=>{
-//       try {
-//             const post = await Post.findById(req.params.id);
-//             if(post.user === req.user.id){
-//                   const deletepost = await Post.findByIdAndDelete(req.params.id);
-//                   return res.status(200).json("You post has been deleted")
-//             }else{
-//                   return res.status(400).json("You are not allow to delete this post")
-//             }
-//       } catch (error) {
-//             return res.status(500).json("Internal server error")
-//       }
-// })
+//Delete post 
+router.delete("/delete/post/:id" , verifyToken , async(req , res)=>{
+      try {
+            const post = await Post.findById(req.params.id);
+            if(post.user === req.user.id){
+                  const deletepost = await Post.findByIdAndDelete(req.params.id);
+                  return res.status(200).json("You post has been deleted")
+            }else{
+                  return res.status(400).json("You are not allow to delete this post")
+            }
+      } catch (error) {
+            return res.status(500).json("Internal server error")
+      }
+})
 
 // /// Get a Following user
 // router.get("/following/:id" , async(req , res)=>{
